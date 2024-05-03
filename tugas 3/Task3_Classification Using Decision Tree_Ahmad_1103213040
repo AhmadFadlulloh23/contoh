@@ -1,0 +1,43 @@
+# Nama: Muhammad Faiz Anindyo Widodo
+# NIM: 1103213011
+# Judul Tugas: Machine Learning dengan Linear Regression pada Dataset Salary_Data_Simple_SVR.csv
+# Lecture: 2
+# Model: Linear Regression
+# Dataset: Salary_Data_Simple_SVR.csv
+
+# Import library yang diperlukan
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+
+
+# Load dataset Iris
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Memisahkan dataset menjadi data latih dan data uji
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Membuat model Decision Tree
+clf = DecisionTreeClassifier(random_state=42)
+
+# Melatih model pada data latih
+clf.fit(X_train, y_train)
+
+# Melakukan prediksi pada data uji
+y_pred = clf.predict(X_test)
+
+# Menghitung akurasi model
+accuracy = accuracy_score(y_test, y_pred)
+print("Akurasi Model: {:.2f}%".format(accuracy * 100))
+
+# Visualisasi Decision Tree
+plt.figure(figsize=(15,10))
+plot_tree(clf, filled=True, feature_names=iris.feature_names, class_names=iris.target_names)
+plt.show()
+
+# Prediksi menggunakan model pada data test
+y_pred = clf.predict(X_test)
